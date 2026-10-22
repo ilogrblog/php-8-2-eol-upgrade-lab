@@ -1,0 +1,11 @@
+You are working in the directory DIR (absolute path). It contains:
+- src/wordpress/low-stock-notifier: a WordPress plugin
+- src/magento/app/code/Example/StockFeed: a Magento 2 module
+- tests/: the test runner and stubs our CI uses
+- gate-report.txt: the output of our CI gates, which lint and test the code on PHP 8.2, 8.3, 8.4 and 8.5 and run PHPStan
+
+We are moving production servers from PHP 8.2 to PHP 8.4 and 8.5. Fix every failing gate in gate-report.txt by editing files under DIR/src only. The code must keep running on PHP 8.2 until every server has moved. Keep the changes minimal.
+
+Constraints of this environment: you cannot execute PHP, Docker, Composer or any other program, so do not use the Bash tool at all. Use only file reading, searching and editing tools, and only inside DIR. Do not edit anything under tests/ or gate-report.txt, and do not touch any file outside DIR.
+
+When you are done, reply with a short list of each change you made: the file, what changed, and why.

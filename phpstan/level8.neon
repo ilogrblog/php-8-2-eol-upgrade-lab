@@ -1,0 +1,11 @@
+# After the migration has merged: raise the level, with a fresh baseline for
+# the older code, so every new or changed line is held to level 8.
+includes:
+    - baseline-level8.neon
+    - ../vendor/phpstan/phpstan-deprecation-rules/rules.neon
+parameters:
+    level: 8
+    phpVersion: 80500
+    scanFiles:
+        - ../tests/stubs/wordpress.php
+        - ../tests/stubs/magento.php

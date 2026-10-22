@@ -1,0 +1,53 @@
+diff --git a/wordpress/low-stock-notifier/includes/class-lsn-logger.php b/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+index c9f6118..bf9c43e 100644
+--- a/wordpress/low-stock-notifier/includes/class-lsn-logger.php
++++ b/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+@@ -8,7 +8,6 @@ class LSN_Logger
+         E_ERROR      => 'error',
+         E_WARNING    => 'warning',
+         E_NOTICE     => 'notice',
+-        E_STRICT     => 'strict',
+         E_DEPRECATED => 'deprecated',
+     ];
+ 
+@@ -26,7 +25,13 @@ class LSN_Logger
+ 
+     public function log($level, $message)
+     {
+-        $label = isset(self::$labels[$level]) ? self::$labels[$level] : 'unknown';
++        $labels = self::$labels;
++        // Add E_STRICT label if it exists (PHP < 8.4)
++        if (defined('E_STRICT')) {
++            $labels[E_STRICT] = 'strict';
++        }
++
++        $label = isset($labels[$level]) ? $labels[$level] : 'unknown';
+         $this->lines[] = sprintf('[%s] %s: %s', $this->channel(), $label, $message);
+         return end($this->lines);
+     }
+diff --git a/wordpress/low-stock-notifier/includes/class-lsn-report.php b/wordpress/low-stock-notifier/includes/class-lsn-report.php
+index de74a42..92674cc 100644
+--- a/wordpress/low-stock-notifier/includes/class-lsn-report.php
++++ b/wordpress/low-stock-notifier/includes/class-lsn-report.php
+@@ -20,7 +20,7 @@ class LSN_Report
+         $grouped = [];
+         foreach ($products as $product) {
+             if ($product['stock'] <= $this->threshold->for_product($product)) {
+-                $category = isset($product['category']) ? $product['category'] : null;
++                $category = isset($product['category']) ? $product['category'] : '';
+                 $grouped[$category][] = $product;
+             }
+         }
+diff --git a/wordpress/low-stock-notifier/low-stock-notifier.php b/wordpress/low-stock-notifier/low-stock-notifier.php
+index 6d7db39..9e6a192 100644
+--- a/wordpress/low-stock-notifier/low-stock-notifier.php
++++ b/wordpress/low-stock-notifier/low-stock-notifier.php
+@@ -25,7 +25,7 @@ function lsn_run_daily_check($products = null)
+     $recipient = get_option('lsn_recipient', '');
+     if ($recipient === '') {
+         // Without a recipient the report must not be built or sent.
+-        trigger_error('Low Stock Notifier: no recipient configured', E_USER_ERROR);
++        throw new RuntimeException('Low Stock Notifier: no recipient configured');
+     }
+ 
+     $products = $products === null ? apply_filters('lsn_products', []) : $products;

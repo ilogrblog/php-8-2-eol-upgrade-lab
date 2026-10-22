@@ -1,0 +1,10 @@
+# The newest PHP the code must run on. Reports what that version deprecates.
+includes:
+    - baseline.neon
+    - ../vendor/phpstan/phpstan-deprecation-rules/rules.neon
+parameters:
+    level: 6
+    phpVersion: 80500
+    scanFiles:
+        - ../tests/stubs/wordpress.php
+        - ../tests/stubs/magento.php

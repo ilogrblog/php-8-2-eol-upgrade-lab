@@ -1,0 +1,169 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/FeedParser.php
+
+		-
+			message: '#^Method Example\\StockFeed\\Model\\FeedParser\:\:parse\(\) has parameter \$feed with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/FeedParser.php
+
+		-
+			message: '#^Method Example\\StockFeed\\Model\\FeedParser\:\:parse\(\) should return array\<int, array\{sku\: string, name\: string, qty\: float, in_stock\: bool\}\> but returns list\<array\{sku\: string\|null, name\: string\|null, qty\: float, in_stock\: bool\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/FeedParser.php
+
+		-
+			message: '#^Property Example\\StockFeed\\Model\\FeedParser\:\:\$logger has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/FeedParser.php
+
+		-
+			message: '#^Method Example\\StockFeed\\Model\\MimeGuard\:\:isAcceptable\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/MimeGuard.php
+
+		-
+			message: '#^Method Example\\StockFeed\\Model\\MimeGuard\:\:isAcceptable\(\) has parameter \$contents with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/MimeGuard.php
+
+		-
+			message: '#^Parameter \#1 \$finfo of function finfo_buffer expects finfo, finfo\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/MimeGuard.php
+
+		-
+			message: '#^Method Example\\StockFeed\\Model\\SupplierClient\:\:lastFeedAt\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/SupplierClient.php
+
+		-
+			message: '#^Property Example\\StockFeed\\Model\\SupplierClient\:\:\$connection has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: ../src/magento/app/code/Example/StockFeed/Model/SupplierClient.php
+
+		-
+			message: '#^Method LSN_Logger\:\:channel\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+
+		-
+			message: '#^Method LSN_Logger\:\:log\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+
+		-
+			message: '#^Method LSN_Logger\:\:log\(\) has parameter \$level with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+
+		-
+			message: '#^Method LSN_Logger\:\:log\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+
+		-
+			message: '#^Property LSN_Logger\:\:\$labels has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+
+		-
+			message: '#^Method LSN_Report\:\:low_stock\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Method LSN_Report\:\:low_stock\(\) has parameter \$products with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Method LSN_Report\:\:to_csv\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Method LSN_Report\:\:to_csv\(\) has parameter \$grouped with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function fclose expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function fputcsv expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function rewind expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function stream_get_contents expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Property LSN_Report\:\:\$threshold has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-report.php
+
+		-
+			message: '#^Method LSN_Settings\:\:default_threshold\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+
+		-
+			message: '#^Method LSN_Threshold\:\:for_product\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+
+		-
+			message: '#^Method LSN_Threshold\:\:for_product\(\) has parameter \$product with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+
+		-
+			message: '#^Property LSN_Threshold\:\:\$settings has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+
+		-
+			message: '#^Function lsn_run_daily_check\(\) has parameter \$products with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: ../src/wordpress/low-stock-notifier/low-stock-notifier.php

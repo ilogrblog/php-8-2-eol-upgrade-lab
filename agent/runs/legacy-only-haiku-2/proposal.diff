@@ -1,0 +1,138 @@
+diff --git a/magento/app/code/Example/StockFeed/Model/FeedParser.php b/magento/app/code/Example/StockFeed/Model/FeedParser.php
+index 0b19b28..f86f779 100644
+--- a/magento/app/code/Example/StockFeed/Model/FeedParser.php
++++ b/magento/app/code/Example/StockFeed/Model/FeedParser.php
+@@ -12,7 +12,7 @@ class FeedParser
+ {
+     private $logger;
+ 
+-    public function __construct(LoggerInterface $logger = null)
++    public function __construct(?LoggerInterface $logger = null)
+     {
+         $this->logger = $logger;
+     }
+@@ -27,7 +27,7 @@ class FeedParser
+             if ($number === 0) {
+                 continue; // header row
+             }
+-            $fields = str_getcsv($line);
++            $fields = str_getcsv($line, ',', '"', '\\');
+             if (count($fields) !== 3) {
+                 if ($this->logger) {
+                     $this->logger->warning('Skipping malformed feed line ' . ($number + 1));
+@@ -37,8 +37,8 @@ class FeedParser
+             $rows[] = [
+                 'sku'      => $fields[0],
+                 'name'     => $fields[1],
+-                'qty'      => (double) $fields[2],
+-                'in_stock' => (boolean) (float) $fields[2],
++                'qty'      => (float) $fields[2],
++                'in_stock' => (bool) (float) $fields[2],
+             ];
+         }
+         return $rows;
+diff --git a/magento/app/code/Example/StockFeed/Model/MimeGuard.php b/magento/app/code/Example/StockFeed/Model/MimeGuard.php
+index 8780f98..d499736 100644
+--- a/magento/app/code/Example/StockFeed/Model/MimeGuard.php
++++ b/magento/app/code/Example/StockFeed/Model/MimeGuard.php
+@@ -11,7 +11,6 @@ class MimeGuard
+     {
+         $finfo = finfo_open(FILEINFO_MIME_TYPE);
+         $type = finfo_buffer($finfo, $contents);
+-        finfo_close($finfo);
+ 
+         return in_array($type, ['text/plain', 'text/csv'], true);
+     }
+diff --git a/magento/app/code/Example/StockFeed/Model/SupplierClient.php b/magento/app/code/Example/StockFeed/Model/SupplierClient.php
+index 8571446..4f93080 100644
+--- a/magento/app/code/Example/StockFeed/Model/SupplierClient.php
++++ b/magento/app/code/Example/StockFeed/Model/SupplierClient.php
+@@ -20,7 +20,6 @@ class SupplierClient
+     public function lastFeedAt()
+     {
+         $property = new \ReflectionProperty(Connection::class, 'lastFeedAt');
+-        $property->setAccessible(true);
+         return $property->getValue($this->connection);
+     }
+ }
+diff --git a/wordpress/low-stock-notifier/includes/class-lsn-logger.php b/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+index a67a05d..08dd22e 100644
+--- a/wordpress/low-stock-notifier/includes/class-lsn-logger.php
++++ b/wordpress/low-stock-notifier/includes/class-lsn-logger.php
+@@ -8,7 +8,6 @@ class LSN_Logger
+         E_ERROR      => 'error',
+         E_WARNING    => 'warning',
+         E_NOTICE     => 'notice',
+-        E_STRICT     => 'strict',
+         E_DEPRECATED => 'deprecated',
+     ];
+ 
+@@ -21,7 +20,7 @@ class LSN_Logger
+      */
+     public function channel()
+     {
+-        return strtolower(get_class());
++        return strtolower(get_class($this));
+     }
+ 
+     public function log($level, $message)
+diff --git a/wordpress/low-stock-notifier/includes/class-lsn-report.php b/wordpress/low-stock-notifier/includes/class-lsn-report.php
+index d3bb195..267dfda 100644
+--- a/wordpress/low-stock-notifier/includes/class-lsn-report.php
++++ b/wordpress/low-stock-notifier/includes/class-lsn-report.php
+@@ -20,7 +20,7 @@ class LSN_Report
+         $grouped = [];
+         foreach ($products as $product) {
+             if ($product['stock'] <= $this->threshold->for_product($product)) {
+-                $category = isset($product['category']) ? $product['category'] : null;
++                $category = isset($product['category']) ? $product['category'] : '';
+                 $grouped[$category][] = $product;
+             }
+         }
+@@ -31,10 +31,10 @@ class LSN_Report
+     public function to_csv(array $grouped)
+     {
+         $handle = fopen('php://temp', 'w+');
+-        fputcsv($handle, ['category', 'sku', 'name', 'stock']);
++        fputcsv($handle, ['category', 'sku', 'name', 'stock'], ',', '"', '\\');
+         foreach ($grouped as $category => $products) {
+             foreach ($products as $product) {
+-                fputcsv($handle, [$category, $product['sku'], $product['name'], $product['stock']]);
++                fputcsv($handle, [$category, $product['sku'], $product['name'], $product['stock']], ',', '"', '\\');
+             }
+         }
+         rewind($handle);
+diff --git a/wordpress/low-stock-notifier/includes/class-lsn-threshold.php b/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+index d2a03ca..ea21f62 100644
+--- a/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
++++ b/wordpress/low-stock-notifier/includes/class-lsn-threshold.php
+@@ -14,7 +14,7 @@ class LSN_Threshold
+ {
+     private $settings;
+ 
+-    public function __construct(LSN_Settings $settings = null)
++    public function __construct(?LSN_Settings $settings = null)
+     {
+         $this->settings = $settings ?: new LSN_Settings();
+     }
+@@ -22,6 +22,6 @@ class LSN_Threshold
+     public function for_product(array $product)
+     {
+         $raw = isset($product['threshold']) ? $product['threshold'] : $this->settings->default_threshold();
+-        return (integer) $raw;
++        return (int) $raw;
+     }
+ }
+diff --git a/wordpress/low-stock-notifier/low-stock-notifier.php b/wordpress/low-stock-notifier/low-stock-notifier.php
+index 6d7db39..c77a673 100644
+--- a/wordpress/low-stock-notifier/low-stock-notifier.php
++++ b/wordpress/low-stock-notifier/low-stock-notifier.php
+@@ -25,7 +25,7 @@ function lsn_run_daily_check($products = null)
+     $recipient = get_option('lsn_recipient', '');
+     if ($recipient === '') {
+         // Without a recipient the report must not be built or sent.
+-        trigger_error('Low Stock Notifier: no recipient configured', E_USER_ERROR);
++        exit('Low Stock Notifier: no recipient configured');
+     }
+ 
+     $products = $products === null ? apply_filters('lsn_products', []) : $products;

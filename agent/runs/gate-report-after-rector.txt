@@ -1,0 +1,17 @@
+PASS lint-8.2
+PASS lint-8.3
+PASS lint-8.4
+PASS lint-8.5
+PASS tests-8.2
+PASS tests-8.3
+FAIL tests-8.4
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:11 Constant E_STRICT is deprecated
+     DEPRECATED wordpress/low-stock-notifier/low-stock-notifier.php:28 Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead
+FAIL tests-8.5
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:24 Using null as an array offset is deprecated, use an empty string instead
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:11 Constant E_STRICT is deprecated since 8.4, the error level was removed
+     DEPRECATED wordpress/low-stock-notifier/low-stock-notifier.php:28 Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead
+PASS phpstan-floor
+FAIL phpstan-target
+     /work/src/wordpress/low-stock-notifier/includes/class-lsn-logger.php:11:Use of constant E_STRICT is deprecated.
+GATES FAILED for build

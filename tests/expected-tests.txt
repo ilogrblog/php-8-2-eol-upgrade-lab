@@ -1,0 +1,12 @@
+load: plugin and module files compile and load
+wp: threshold falls back to the option and casts leading digits
+wp: products without a category are grouped under the empty key
+wp: CSV output is byte-identical to the legacy report
+wp: subclass logs to the base channel
+wp: daily check emails the report and returns the count
+wp: daily check stops, and sends nothing, without a recipient
+magento: feed parser keeps backslash-escaped quotes
+magento: feed parser works without a logger
+magento: MIME guard accepts text and refuses a PNG
+magento: supplier client reads the private timestamp
+magento: module registers itself

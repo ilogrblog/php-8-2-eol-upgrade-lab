@@ -1,0 +1,12 @@
+# Oldest to newest PHP the code must run on. Reports functions, classes and
+# constants that do not exist on 8.2, such as array_find() or array_first().
+includes:
+    - baseline.neon
+parameters:
+    level: 6
+    phpVersion:
+        min: 80200
+        max: 80500
+    scanFiles:
+        - ../tests/stubs/wordpress.php
+        - ../tests/stubs/magento.php

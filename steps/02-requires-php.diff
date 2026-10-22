@@ -1,0 +1,13 @@
+diff --git a/wordpress/low-stock-notifier/low-stock-notifier.php b/wordpress/low-stock-notifier/low-stock-notifier.php
+index 6d7db39..1ebcea8 100644
+--- a/wordpress/low-stock-notifier/low-stock-notifier.php
++++ b/wordpress/low-stock-notifier/low-stock-notifier.php
+@@ -3,7 +3,7 @@
+  * Plugin Name: Low Stock Notifier
+  * Description: Emails a CSV of products that have fallen below their stock threshold.
+  * Version: 1.4.2
+- * Requires PHP: 7.4
++ * Requires PHP: 8.2
+  */
+ 
+ defined('ABSPATH') || exit;

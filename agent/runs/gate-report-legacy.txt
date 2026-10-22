@@ -1,0 +1,42 @@
+PASS lint-8.2
+PASS lint-8.3
+PASS lint-8.4
+PASS lint-8.5
+PASS tests-8.2
+FAIL tests-8.3
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:24 Calling get_class() without arguments is deprecated
+FAIL tests-8.4
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-threshold.php:17 LSN_Threshold::__construct(): Implicitly marking parameter $settings as nullable is deprecated, the explicit nullable type must be used instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:15 Example\StockFeed\Model\FeedParser::__construct(): Implicitly marking parameter $logger as nullable is deprecated, the explicit nullable type must be used instead
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:34 fputcsv(): the $escape parameter must be provided as its default value will change
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:37 fputcsv(): the $escape parameter must be provided as its default value will change
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:11 Constant E_STRICT is deprecated
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:24 Calling get_class() without arguments is deprecated
+     DEPRECATED wordpress/low-stock-notifier/low-stock-notifier.php:28 Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:30 str_getcsv(): the $escape parameter must be provided as its default value will change
+FAIL tests-8.5
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-threshold.php:25 Non-canonical cast (integer) is deprecated, use the (int) cast instead
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-threshold.php:17 LSN_Threshold::__construct(): Implicitly marking parameter $settings as nullable is deprecated, the explicit nullable type must be used instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:40 Non-canonical cast (double) is deprecated, use the (float) cast instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:41 Non-canonical cast (boolean) is deprecated, use the (bool) cast instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:15 Example\StockFeed\Model\FeedParser::__construct(): Implicitly marking parameter $logger as nullable is deprecated, the explicit nullable type must be used instead
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:24 Using null as an array offset is deprecated, use an empty string instead
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:34 fputcsv(): the $escape parameter must be provided as its default value will change
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-report.php:37 fputcsv(): the $escape parameter must be provided as its default value will change
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:11 Constant E_STRICT is deprecated since 8.4, the error level was removed
+     DEPRECATED wordpress/low-stock-notifier/includes/class-lsn-logger.php:24 Calling get_class() without arguments is deprecated
+     DEPRECATED wordpress/low-stock-notifier/low-stock-notifier.php:28 Passing E_USER_ERROR to trigger_error() is deprecated since 8.4, throw an exception or call exit with a string message instead
+     DEPRECATED magento/app/code/Example/StockFeed/Model/FeedParser.php:30 str_getcsv(): the $escape parameter must be provided as its default value will change
+     DEPRECATED magento/app/code/Example/StockFeed/Model/MimeGuard.php:14 Function finfo_close() is deprecated since 8.5, as finfo objects are freed automatically
+     DEPRECATED magento/app/code/Example/StockFeed/Model/SupplierClient.php:23 Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect since PHP 8.1
+PASS phpstan-floor
+FAIL phpstan-target
+     /work/src/magento/app/code/Example/StockFeed/Model/FeedParser.php:15:Deprecated in PHP 8.4: Parameter #1 $logger (Psr\Log\LoggerInterface) is implicitly nullable via default value null.
+     /work/src/magento/app/code/Example/StockFeed/Model/FeedParser.php:40:Non-standard (double) cast is deprecated in PHP 8.5. Use (float) instead.
+     /work/src/magento/app/code/Example/StockFeed/Model/FeedParser.php:41:Non-standard (boolean) cast is deprecated in PHP 8.5. Use (bool) instead.
+     /work/src/magento/app/code/Example/StockFeed/Model/MimeGuard.php:14:Call to deprecated function finfo_close().
+     /work/src/magento/app/code/Example/StockFeed/Model/SupplierClient.php:23:Call to deprecated method setAccessible() of class ReflectionProperty.
+     /work/src/wordpress/low-stock-notifier/includes/class-lsn-logger.php:11:Use of constant E_STRICT is deprecated.
+     /work/src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php:17:Deprecated in PHP 8.4: Parameter #1 $settings (LSN_Settings) is implicitly nullable via default value null.
+     /work/src/wordpress/low-stock-notifier/includes/class-lsn-threshold.php:25:Non-standard (integer) cast is deprecated in PHP 8.5. Use (int) instead.
+GATES FAILED for legacy

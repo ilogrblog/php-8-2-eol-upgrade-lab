@@ -1,0 +1,11 @@
+{
+    "name": "example/php-eol-upgrade",
+    "description": "Rector, PHPStan and versioned PHP containers as gates for a PHP 8.2 to 8.4 and 8.5 upgrade of a WordPress plugin and a Magento module",
+    "type": "project",
+    "license": "MIT",
+    "require-dev": {
+        "rector/rector": "^2.6",
+        "phpstan/phpstan": "^2.2",
+        "phpstan/phpstan-deprecation-rules": "^2.0"
+    }
+}
