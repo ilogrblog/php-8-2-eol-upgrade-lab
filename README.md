@@ -34,7 +34,7 @@ Then:
 bin/gates.sh legacy      # fails on 8.3, 8.4 and 8.5; passes on 8.2
 bin/gates.sh upgraded    # every gate passes
 bin/reproduce.sh         # legacy + Rector + steps 02 and 03 must equal upgraded/
-bin/check.sh             # 72 checks, about ten minutes
+bin/check.sh             # 72 checks, several minutes
 bin/check-safety.sh      # 7 checks that the scripts refuse and isolate what they should
 ```
 
